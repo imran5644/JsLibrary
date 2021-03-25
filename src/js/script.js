@@ -13,8 +13,7 @@ let myLibrary = [
     }
 ];
 
-function Book(title,author,noOfPage, read) {
-  // the constructor...
+function Book(title, author, noOfPage, read) {
   this.title = title;
   this.author = author;
   this.noOfPage = noOfPage;
@@ -22,12 +21,14 @@ function Book(title,author,noOfPage, read) {
 }
 
 function addBookToLibrary() {
-  // do stuff here
-  const book = new Book('Vampires Blood', 'Natasia Poleman', 467)
-  myLibrary.push = book;
+const title = document.getElementById('name').value;
+const author = document.getElementById('author').value;
+const noOfPage = document.getElementById('numPages').value;
+const read = document.getElementById('chk');
+const book = new Book(title, author, noOfPage, read.checked)
+myLibrary.push(book);
+listBooks();
 }
-
-console.log(myLibrary);
 
 
 function listBooks() {
@@ -49,11 +50,10 @@ function listBooks() {
         </div>
       </div>`;
     }
-    addBookToLibrary()
   }
 
   function deleteBook(id) {
-      myLibrary.splice(id,1);
+      myLibrary.splice(id, 1);
       listBooks();
   }
 
@@ -62,8 +62,4 @@ function listBooks() {
     listBooks();
   }
 
-  window.onload = function() {
-    listBooks()
-    addBookToLibrary()
-  };
   
