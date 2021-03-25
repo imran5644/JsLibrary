@@ -21,10 +21,31 @@ function Book(title, author, noOfPage, read) {
 }
 
 function addBookToLibrary() {
-const title = document.getElementById('name').value;
+const title = document.getElementById('title').value;
 const author = document.getElementById('author').value;
-const noOfPage = document.getElementById('numPages').value;
+const noOfPage = document.getElementById('noOfPage').value;
 const read = document.getElementById('chk');
+
+const errors =  document.getElementById('error');
+errors.innerHTML = '';
+
+if (title === '') {
+    errors.innerHTML += 'Title can\'t be empty';
+    return;
+}
+if (author === ''){
+    errors.innerHTML += 'Author can\'t be empty';
+    return;
+}
+if (noOfPage === ''){
+    errors.innerHTML += 'Page number can\'t be empty';
+    return;
+}
+if (!Number.isInteger(parseInt(noOfPage))){
+    errors.innerHTML += 'Page number should be integer ';
+    return;
+}
+
 const book = new Book(title, author, noOfPage, read.checked)
 myLibrary.push(book);
 listBooks();
@@ -61,5 +82,3 @@ function listBooks() {
     myLibrary[id].read = !myLibrary[id].read;
     listBooks();
   }
-
-  
