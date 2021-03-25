@@ -25,7 +25,6 @@ function addBookToLibrary() {
   // do stuff here
   const book = new Book('Vampires Blood', 'Natasia Poleman', 467)
   myLibrary.push = book;
-
 }
 
 console.log(myLibrary);
@@ -50,6 +49,12 @@ function listBooks() {
         </div>
       </div>`;
     }
+    addBookToLibrary()
+  }
+
+  function deleteBook(id) {
+      myLibrary.splice(id,1);
+      listBooks();
   }
 
   function readBook(id) {
@@ -59,5 +64,6 @@ function listBooks() {
 
   window.onload = function() {
     listBooks()
+    addBookToLibrary()
   };
   
