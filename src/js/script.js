@@ -8,55 +8,20 @@ function Book(title, author, noOfPage, read) {
 }
 
 function emptyInputs() {
-	document.getElementById('title').value = '';
-	document.getElementById('author').value = '';
-	document.getElementById('noOfPage').value = '';
+  document.getElementById('title').value = '';
+  document.getElementById('author').value = '';
+  document.getElementById('noOfPage').value = '';
 }
 
 function closeModal() {
   document.getElementById('close').click();
 }
 
-function addBookToLibrary() {
-const title = document.getElementById('title').value;
-const author = document.getElementById('author').value;
-const noOfPage = document.getElementById('noOfPage').value;
-const read = document.getElementById('chk');
-
-const errors =  document.getElementById('error');
-errors.innerHTML = '';
-
-if (title === '') {
-    errors.innerHTML += 'Title can\'t be empty';
-    return;
-}
-if (author === ''){
-    errors.innerHTML += 'Author can\'t be empty';
-    return;
-}
-if (noOfPage === ''){
-    errors.innerHTML += 'Page number can\'t be empty';
-    return;
-}
-if (!Number.isInteger(parseInt(noOfPage))){
-    errors.innerHTML += 'Page number should be integer ';
-    return;
-}
-
-const book = new Book(title, author, noOfPage, read.checked)
-myLibrary.push(book);
-listBooks();
-setData();
-emptyInputs();
-closeModal();
-}
-
-
 function listBooks() {
-    document.getElementById('list').innerHTML = '';
-    const d = document.getElementById('list');
-    for (let i = 0; i < myLibrary.length; i += 1) {
-      d.innerHTML += `
+  document.getElementById('list').innerHTML = '';
+  const d = document.getElementById('list');
+  for (let i = 0; i < myLibrary.length; i += 1) {
+    d.innerHTML += `
       <div class="col-5">
         <div class="card" style="width: 18rem;">
           <div class="card-body">
@@ -70,35 +35,69 @@ function listBooks() {
           </div>
         </div>
       </div>`;
-    }
   }
-
-  function deleteBook(id) {
-      myLibrary.splice(id, 1);
-      listBooks();
-      setData();
-  }
-
-  function readBook(id) {
-    myLibrary[id].read = !myLibrary[id].read;
-    listBooks();
-  }
-
-// setting Library to be stored in local storage
-  function setData() {
-    localStorage.setItem(`myLibrary`, JSON.stringify(myLibrary));
 }
 
-//pulls books from local storage when page is refreshed
-function restore() {
-  if(!localStorage.myLibrary) {
-     listBooks();
+// setting Library to be stored in local storage
+function setData() {
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+}
+
+function addBookToLibrary() {
+  const title = document.getElementById('title').value;
+  const author = document.getElementById('author').value;
+  const noOfPage = document.getElementById('noOfPage').value;
+  const read = document.getElementById('chk');
+
+  const errors = document.getElementById('error');
+  errors.innerHTML = '';
+
+  if (title === '') {
+    errors.innerHTML += 'Title can\'t be empty';
+    return;
   }
-  else {
-      let objects = localStorage.getItem('myLibrary') // gets information from local storage to use in below loop to create DOM/display
-      objects = JSON.parse(objects);
-      myLibrary = objects;
-      listBooks();
+  if (author === '') {
+    errors.innerHTML += 'Author can\'t be empty';
+    return;
+  }
+  if (noOfPage === '') {
+    errors.innerHTML += 'Page number can\'t be empty';
+    return;
+  }
+  if (!Number.isInteger(parseInt(noOfPage, 10))) {
+    errors.innerHTML += 'Page number should be integer ';
+    return;
+  }
+
+  const book = new Book(title, author, noOfPage, read.checked);
+  myLibrary.push(book);
+  listBooks();
+  setData();
+  emptyInputs();
+  closeModal();
+}
+
+
+function deleteBook(id) {
+  myLibrary.splice(id, 1);
+  listBooks();
+  setData();
+}
+
+function readBook(id) {
+  myLibrary[id].read = !myLibrary[id].read;
+  listBooks();
+}
+
+// pulls books from local storage when page is refreshed
+function restore() {
+  if (!localStorage.myLibrary) {
+    listBooks();
+  } else {
+    let objects = localStorage.getItem('myLibrary'); // gets information from local storage to use in below loop to create DOM/display
+    objects = JSON.parse(objects);
+    myLibrary = objects;
+    listBooks();
   }
 }
 
