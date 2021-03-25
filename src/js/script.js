@@ -46,6 +46,7 @@ if (!Number.isInteger(parseInt(noOfPage))){
 const book = new Book(title, author, noOfPage, read.checked)
 myLibrary.push(book);
 listBooks();
+setData();
 emptyInputs();
 closeModal();
 }
@@ -75,9 +76,30 @@ function listBooks() {
   function deleteBook(id) {
       myLibrary.splice(id, 1);
       listBooks();
+      setData();
   }
 
   function readBook(id) {
     myLibrary[id].read = !myLibrary[id].read;
     listBooks();
   }
+
+// setting Library to be stored in local storage
+  function setData() {
+    localStorage.setItem(`myLibrary`, JSON.stringify(myLibrary));
+}
+
+//pulls books from local storage when page is refreshed
+function restore() {
+  if(!localStorage.myLibrary) {
+     listBooks();
+  }
+  else {
+      let objects = localStorage.getItem('myLibrary') // gets information from local storage to use in below loop to create DOM/display
+      objects = JSON.parse(objects);
+      myLibrary = objects;
+      listBooks();
+  }
+}
+
+restore();
