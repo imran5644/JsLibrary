@@ -1,23 +1,20 @@
-let myLibrary = [
-    {
-        title: 'Boss',
-        author: 'Hritik Roshan',
-        noOfPage: 900,
-        read: false
-    },
-    {
-        title: 'Vampires Blood',
-        author: 'Natasia Poleman',
-        noOfPage: 456,
-        read: true
-    }
-];
+let myLibrary = [];
 
 function Book(title, author, noOfPage, read) {
   this.title = title;
   this.author = author;
   this.noOfPage = noOfPage;
   this.read = read;
+}
+
+function emptyInputs() {
+	document.getElementById('title').value = '';
+	document.getElementById('author').value = '';
+	document.getElementById('noOfPage').value = '';
+}
+
+function closeModal() {
+  document.getElementById('close').click();
 }
 
 function addBookToLibrary() {
@@ -49,6 +46,8 @@ if (!Number.isInteger(parseInt(noOfPage))){
 const book = new Book(title, author, noOfPage, read.checked)
 myLibrary.push(book);
 listBooks();
+emptyInputs();
+closeModal();
 }
 
 
