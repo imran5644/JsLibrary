@@ -1,8 +1,8 @@
 let myLibrary = [];
 
-const Book = (title, author, noOfPage, read) => {
-  return {title, author, noOfPage, read};
-};
+const Book = (title, author, noOfPage, read) => ({
+  title, author, noOfPage, read,
+});
 
 function emptyInputs() {
   document.getElementById('title').value = '';
