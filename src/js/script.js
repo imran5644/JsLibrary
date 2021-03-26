@@ -1,12 +1,12 @@
 let myLibrary = [];
 
-  class Book { 
+class Book {
   constructor(title, author, noOfPage, read) {
-  this.title = title;
-  this.author = author;
-  this.noOfPage = noOfPage;
-  this.read = read;
-}
+    this.title = title;
+    this.author = author;
+    this.noOfPage = noOfPage;
+    this.read = read;
+  }
 }
 
 function emptyInputs() {
